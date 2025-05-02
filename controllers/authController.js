@@ -35,3 +35,17 @@ export const login = async (req, res, next) => {
     next(err);
   }
 };
+
+export const returnUser = async (req, res, next) => {
+  try {
+    const user = req.user;     
+    if (!user) {
+      return res.status(401).json({ message: "Unauthorized" });
+    }
+
+    res.status(200).json({ name: user.name });
+  } catch (error) {
+    next(error);
+  }
+};
+
